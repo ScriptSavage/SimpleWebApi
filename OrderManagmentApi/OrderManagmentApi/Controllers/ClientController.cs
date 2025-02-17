@@ -1,3 +1,4 @@
+using Application.DTO;
 using Application.Services.Client;
 using Infrastructure.Repositories.Client;
 using Microsoft.AspNetCore.Mvc;
@@ -6,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace OrderManagmentApi.Controllers;
 
 [ApiController]
-[Route("Clients")]
+[Route("clients")]
 public class ClientController : ControllerBase
 {
     private readonly IClientServices _clientServices;
@@ -22,5 +23,13 @@ public class ClientController : ControllerBase
     {
         var response = await _clientServices.GetClientsAsync();
         return Ok(response);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> AddNewClientAsync([FromBody]ClientDTO clientDto)
+    {
+        var data = await _clientServices.AddNewClientDtoAsync(clientDto);
+        
+        return StatusCode(StatusCodes.Status201Created, data);
     }
 }

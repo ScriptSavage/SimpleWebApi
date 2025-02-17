@@ -10,4 +10,6 @@ public class Client
     public string FirstName { get; set; } = default!;
 
     public string LastName { get; set; } = default!;
+
+    public IEnumerable<Order> Orders { get; set; }
 }
