@@ -1,4 +1,5 @@
 using Infrastructure.Context;
+using Infrastructure.Repositories;
 using Infrastructure.Repositories.Client;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -18,6 +19,7 @@ public  static class ExtentionInfrastructure
         });
 
         services.AddScoped<IClientRepository, ClientRepository>();
+        services.AddScoped<IProductRepository, ProductRepository>();
 
     }
 }
