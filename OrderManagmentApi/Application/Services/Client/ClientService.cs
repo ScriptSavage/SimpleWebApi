@@ -17,13 +17,28 @@ public class ClientService : IClientServices
     {
         var clientsData = await _clientRepository.GetClientsAsync();
 
-        var clients = clientsData
-            .Select(e => new ClientDTO
-            {
+        var clients = clientsData.Select(e => new ClientDTO
+        {
+
             FirstName = e.FirstName,
             LastName = e.LastName,
-            }).ToList();
+        }).ToList();
 
         return clients;
+    }
+
+    public async Task<int> AddNewClientDtoAsync(ClientDTO clientDto)
+    {
+      
+        
+        var newClientToAdd = new Domain.Entites.Client()
+        {
+            FirstName = clientDto.FirstName,
+            LastName = clientDto.LastName
+        };
+        
+        var clientRepo = await _clientRepository.AddNewClientAsync(newClientToAdd);
+        
+       return clientRepo;
     }
 }
