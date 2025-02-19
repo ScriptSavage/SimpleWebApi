@@ -13,6 +13,7 @@
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
+        <PackageReference Include="NLog.Web.AspNetCore" Version="5.4.0" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
     </ItemGroup>
 
@@ -23,6 +24,10 @@
 
     <ItemGroup>
       <None Include="appsettings.json" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Files\" />
     </ItemGroup>
 
 </Project>

@@ -1,5 +1,6 @@
 using Application.DTO;
 using Infrastructure.Repositories.Client;
+using Microsoft.Extensions.Logging;
 
 namespace Application.Services.Client;
 
@@ -7,15 +8,18 @@ public class ClientService : IClientServices
 {
     
     private readonly IClientRepository _clientRepository;
+    private readonly ILogger<ClientService> _clientLogger;
 
-    public ClientService(IClientRepository clientRepository)
+    public ClientService(IClientRepository clientRepository, ILogger<ClientService> clientLogger)
     {
         _clientRepository = clientRepository;
+        _clientLogger = clientLogger;
     }
 
     public async Task<List<ClientDTO>> GetClientsAsync()
     {
         var clientsData = await _clientRepository.GetClientsAsync();
+        _clientLogger.LogInformation("Client data retrieved successfully");
 
         var clients = clientsData.Select(e => new ClientDTO
         {

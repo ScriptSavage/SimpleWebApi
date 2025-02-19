@@ -1,4 +1,5 @@
 using Application.Services.Client;
+using Application.Services.Order;
 using Application.Services.Product;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -10,5 +11,6 @@ public static class ExtentionApplication
     {
         services.AddScoped<IClientServices, ClientService>();
         services.AddScoped<IProductService, ProductService>();
+        services.AddScoped<IOrderService, OrderService>();
     }
 }
