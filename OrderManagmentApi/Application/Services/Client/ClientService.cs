@@ -45,4 +45,10 @@ public class ClientService : IClientServices
         
        return clientRepo;
     }
+
+    public async Task<bool> DoesClientExistAsync(int clientId)
+    {
+        var data = await _clientRepository.DoesClientExistAsync(clientId);
+        return data;
+    }
 }

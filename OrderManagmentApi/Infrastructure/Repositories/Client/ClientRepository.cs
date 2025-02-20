@@ -25,4 +25,10 @@ public class ClientRepository : IClientRepository
       var commitData =  await _context.SaveChangesAsync();
        return commitData;
     }
+
+    public async Task<bool> DoesClientExistAsync(int clientId)
+    {
+        var data = await _context.Clients.AnyAsync(x => x.Id == clientId);
+        return data;
+    }
 }
