@@ -48,6 +48,8 @@ public class ClientController : ControllerBase
         }
 
         var result = await _orderService.GetClientOrdersAsync(clientId);
+        
+
         return Ok(result);
     }
 }
