@@ -41,6 +41,12 @@ public class ClientController : ControllerBase
     [Route("{clientId}/orders")]
     public async Task<IActionResult> GetClientOrdersAsync([FromRoute] int clientId)
     {
+        var clientExists = await _clientServices.DoesClientExistAsync(clientId);
+        if (!clientExists)
+        {
+            return StatusCode(StatusCodes.Status404NotFound, "Client does not exist");
+        }
+
         var result = await _orderService.GetClientOrdersAsync(clientId);
         return Ok(result);
     }
