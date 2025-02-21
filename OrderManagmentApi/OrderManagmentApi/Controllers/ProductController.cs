@@ -22,4 +22,12 @@ public class ProductController : ControllerBase
         await _productService.AddNewProductAsync(productDto);
         return StatusCode(StatusCodes.Status201Created,productDto);
     }
+
+    [HttpDelete]
+    [Route("{productId}")]
+    public async Task<IActionResult> DeleteProductAsync(int productId)
+    {
+        await _productService.DeleteProductAsync(productId);
+        return StatusCode(StatusCodes.Status204NoContent);
+    }
 }

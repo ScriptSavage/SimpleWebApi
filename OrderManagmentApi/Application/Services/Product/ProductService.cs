@@ -25,4 +25,16 @@ public class ProductService : IProductService
 
        return resultProduct;
     }
+
+    public async Task<int> DeleteProductAsync(int productId)
+    {
+        var doesProductExist = await _productRepository.DoesProductExistAsync(productId);
+        if (!doesProductExist)
+        {
+            throw new Exception($"Product with id: {productId} does not exist");
+        }
+        var resultProduct = await _productRepository.DeleteProductAsync(productId);
+
+        return resultProduct;
+    }
 }
