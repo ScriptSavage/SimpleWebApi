@@ -1,5 +1,4 @@
 using Application.DTO;
-using Domain.Entites;
 using Infrastructure.Repositories.Order;
 
 namespace Application.Services.Order;

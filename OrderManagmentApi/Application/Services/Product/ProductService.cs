@@ -14,7 +14,7 @@ public class ProductService : IProductService
 
     public async Task<int> AddNewProductAsync(NewProductDTO newProductDto)
     {
-        var newProduct = new Domain.Entites.Product()
+        var newProduct = new Domain.Entities.Product()
         {
             Name = newProductDto.Name,
             Description = newProductDto.Description,

@@ -2,9 +2,9 @@ namespace Infrastructure.Repositories.Client;
 
 public interface IClientRepository
 {
-    Task<List<Domain.Entites.Client>> GetClientsAsync();
+    Task<List<Domain.Entities.Client>> GetClientsAsync();
     
-    Task<int> AddNewClientAsync(Domain.Entites.Client client);
+    Task<int> AddNewClientAsync(Domain.Entities.Client client);
     
     Task<bool> DoesClientExistAsync(int clientId);
 }

@@ -35,7 +35,7 @@ public class ClientService : IClientServices
     {
       
         
-        var newClientToAdd = new Domain.Entites.Client()
+        var newClientToAdd = new Domain.Entities.Client()
         {
             FirstName = clientDto.FirstName,
             LastName = clientDto.LastName

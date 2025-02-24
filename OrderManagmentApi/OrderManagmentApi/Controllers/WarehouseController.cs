@@ -1,6 +1,5 @@
 using Application.DTO;
 using Application.Services.Warehouse;
-using Domain.Entites;
 using Microsoft.AspNetCore.Mvc;
 
 namespace OrderManagmentApi.Controllers;

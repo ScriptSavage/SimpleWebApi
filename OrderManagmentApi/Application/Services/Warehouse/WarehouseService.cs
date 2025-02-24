@@ -14,7 +14,7 @@ public class WarehouseService : IWarehouseService
 
     public async Task<int> AddNewProductToWarehouse(int warehouseId, NewProductDTO product ,int quantity)
     {
-        var newProduct = new Domain.Entites.Product()
+        var newProduct = new Domain.Entities.Product()
         {
             Description = product.Description,
             Name = product.Name,

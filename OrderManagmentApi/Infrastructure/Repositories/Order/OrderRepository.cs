@@ -12,7 +12,7 @@ public class OrderRepository : IOrderRepository
         _context = context;
     }
 
-    public async Task<List<Domain.Entites.Order>> GetClientOrdersAsync(int clientId)
+    public async Task<List<Domain.Entities.Order>> GetClientOrdersAsync(int clientId)
     {
         var OrderData = await _context.Orders
             .Include(e => e.Client).Where(e => e.ClientID == clientId)
