@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace Domain.Entites;
+namespace Domain.Entities;
 
 [PrimaryKey(nameof(ProductId),nameof(OrderId))]
 public class OrderProduct
