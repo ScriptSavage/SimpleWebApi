@@ -68,7 +68,7 @@ public class ProductRepository : IProductRepository
             
                 if (warehouseProduct == null)
                 {
-                    throw new NotFoundException("Produkt nie jest powiązany z danym magazynem");
+                    throw new NotFoundException("Produkt is not assignt to Warehouse");
                 }
             
                 _context.WarehouseProducts.Remove(warehouseProduct);
@@ -91,7 +91,7 @@ public class ProductRepository : IProductRepository
             catch (Exception ex)
             {
                 await transaction.RollbackAsync();
-                throw new Exception("Wystąpił błąd podczas usuwania produktu z magazynu", ex);
+                throw new Exception("Something went wrong", ex);
             }
         }
         return result;
