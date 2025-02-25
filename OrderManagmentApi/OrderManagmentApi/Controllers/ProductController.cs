@@ -30,4 +30,21 @@ public class ProductController : ControllerBase
         await _productService.DeleteProductAsync(productId);
         return StatusCode(StatusCodes.Status204NoContent);
     }
+
+    [HttpPut]
+    [Route("{productId}")]
+    public async Task<IActionResult> UpdateProductAsync([FromBody]NewProductDTO productDto,int productId)
+    {
+        var dataToUpdate = await _productService.UpdateProductAsync(productDto,productId);
+        return StatusCode(StatusCodes.Status201Created,dataToUpdate);
+    }
+
+    [HttpDelete]
+    [Route("{productId}/{warehouseId}")]
+    public async Task<IActionResult> DeleteProductFromWarehouseAsync(int productId, int warehouseId)
+    {
+         await _productService.DeleteProductFromWarehouseAsync(productId,warehouseId);
+        return StatusCode(StatusCodes.Status204NoContent);
+
+    }
 }

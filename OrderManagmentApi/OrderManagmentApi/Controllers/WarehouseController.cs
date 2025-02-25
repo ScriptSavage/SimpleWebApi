@@ -1,5 +1,6 @@
 using Application.DTO;
 using Application.Services.Warehouse;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace OrderManagmentApi.Controllers;
@@ -20,6 +21,13 @@ public class WarehouseController :ControllerBase
     public async Task<IActionResult> AddNewProductToWarehouseAsync(int warehouseId, [FromBody] NewProductDTO product,int quantity)
     {
         var data = await _warehouseService.AddNewProductToWarehouse(warehouseId, product,quantity);
+        return StatusCode(StatusCodes.Status201Created, data);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> AddNewWarehouseAsync([FromBody] NewWarehouseDTO product)
+    {
+        var data = await _warehouseService.AddNewWarehouseAsync(product);
         return StatusCode(StatusCodes.Status201Created, data);
     }
 }

@@ -4,5 +4,6 @@ namespace Infrastructure.Repositories.Warehouse;
 
 public interface IWarehouseRepository
 {
-    Task<int> AddWarehouseProdcutAsync(int werehouseId , Product product , int quantity);
+    Task<int> AddProductToWarehouse(int werehouseId , Product product , int quantity);
+    Task<int> AddNewWarehouse(Domain.Entities.Warehouse warehouse);
 }

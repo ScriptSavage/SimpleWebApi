@@ -14,7 +14,7 @@ public class WarehouseRepository : IWarehouseRepository
         _projectContext = projectContext;
     }
 
-    public async Task<int> AddWarehouseProdcutAsync(int werehouseId, Product product, int quantity)
+    public async Task<int> AddProductToWarehouse(int werehouseId, Product product, int quantity)
     {
         var warehouse = await _projectContext.Warehouse
             .Where(e => e.Id == werehouseId)
@@ -40,5 +40,12 @@ public class WarehouseRepository : IWarehouseRepository
         var result  = await _projectContext.SaveChangesAsync();
 
         return result;
+    }
+
+    public async Task<int> AddNewWarehouse(Domain.Entities.Warehouse warehouse)
+    {
+        var dataToAdd = await _projectContext.Warehouse.AddAsync(warehouse);
+        var commit = await _projectContext.SaveChangesAsync();
+        return commit;
     }
 }

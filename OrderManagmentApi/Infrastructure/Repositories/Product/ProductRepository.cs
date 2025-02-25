@@ -1,3 +1,4 @@
+using Application.Exceptions;
 using Domain.Entities;
 using Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
@@ -39,4 +40,61 @@ public class ProductRepository : IProductRepository
        
        return commitData;
     }
+
+    public async Task<int> UpdateProductDescriptionAsync(string description,int productId)
+    {
+        var productToUpdate = await _context.Products.Where(e=>e.Id == productId).FirstOrDefaultAsync();
+        if (productToUpdate == null)
+        {
+            throw new NotFoundException("Product not found");
+        }
+
+        productToUpdate.Description = description;
+       var commit = await _context.SaveChangesAsync();
+
+
+       return commit;
+    }
+
+    public async Task<int> DeleteProductFromWarehouseAsync(int productId, int warehouseId)
+    {
+        int result = 0;
+        using (var transaction = await _context.Database.BeginTransactionAsync())
+        {
+            try
+            {
+                var warehouseProduct = await _context.WarehouseProducts
+                    .FirstOrDefaultAsync(wp => wp.ProductId == productId && wp.WarehouseId == warehouseId);
+            
+                if (warehouseProduct == null)
+                {
+                    throw new NotFoundException("Produkt nie jest powiązany z danym magazynem");
+                }
+            
+                _context.WarehouseProducts.Remove(warehouseProduct);
+            
+                var isProductUsedElsewhere = await _context.WarehouseProducts
+                    .AnyAsync(wp => wp.ProductId == productId && wp.WarehouseId != warehouseId);
+            
+                if (!isProductUsedElsewhere)
+                {
+                    var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == productId);
+                    if (product != null)
+                    {
+                        _context.Products.Remove(product);
+                    }
+                }
+            
+                result = await _context.SaveChangesAsync();
+                await transaction.CommitAsync();
+            }
+            catch (Exception ex)
+            {
+                await transaction.RollbackAsync();
+                throw new Exception("Wystąpił błąd podczas usuwania produktu z magazynu", ex);
+            }
+        }
+        return result;
+    }
+
 }

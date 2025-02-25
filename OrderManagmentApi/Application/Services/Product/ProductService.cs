@@ -37,4 +37,16 @@ public class ProductService : IProductService
 
         return resultProduct;
     }
+
+    public async Task<int> UpdateProductAsync(NewProductDTO productDto,int productId)
+    {
+        var dataToUpdate = await _productRepository.UpdateProductDescriptionAsync(productDto.Description,productId);
+        return dataToUpdate;
+    }
+
+    public async Task<int> DeleteProductFromWarehouseAsync(int warehouseId, int productId)
+    {
+        var resultProduct = await _productRepository.DeleteProductFromWarehouseAsync(warehouseId, productId);
+        return resultProduct;
+    }
 }

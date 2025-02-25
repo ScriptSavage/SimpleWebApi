@@ -21,8 +21,19 @@ public class WarehouseService : IWarehouseService
             Price = product.Price,
             
         };
-        var warehouseToAdd = await _warehouseRepository.AddWarehouseProdcutAsync(warehouseId, newProduct,quantity);
+        var warehouseToAdd = await _warehouseRepository.AddProductToWarehouse(warehouseId, newProduct,quantity);
 
         return warehouseToAdd;
+    }
+
+    public async Task<int> AddNewWarehouseAsync(NewWarehouseDTO warehouse)
+    {
+        var newWarehouse = new Domain.Entities.Warehouse()
+        {
+            Name = warehouse.Name,
+            Type = warehouse.Type
+        };
+        var data = await _warehouseRepository.AddNewWarehouse(newWarehouse);
+       return data;
     }
 }
