@@ -50,4 +50,19 @@ public class ClientController : ControllerBase
         var result = await _orderService.GetClientOrdersAsync(clientId);
         return Ok(result);
     }
+
+
+    [HttpDelete]
+    [Route("{clientId}")]
+    public async Task<IActionResult> DeleteClientAsync([FromRoute] int clientId)
+    {
+        var doesClientExistAsync = await _clientServices.DoesClientExistAsync(clientId);
+        if (!doesClientExistAsync)
+        {
+            return StatusCode(StatusCodes.Status404NotFound, "Client does not exist");
+        }
+
+        await _clientServices.DeleteClientAsync(clientId);
+        return StatusCode(StatusCodes.Status204NoContent);
+    }
 }
