@@ -51,4 +51,10 @@ public class ClientService : IClientServices
         var data = await _clientRepository.DoesClientExistAsync(clientId);
         return data;
     }
+
+    public async Task<int> DeleteClientAsync(int clientId)
+    {
+        var clientToDelete = await _clientRepository.DeleteClientAsync(clientId);
+        return clientToDelete;
+    }
 }

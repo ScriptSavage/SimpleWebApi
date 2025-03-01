@@ -48,4 +48,24 @@ public class WarehouseRepository : IWarehouseRepository
         var commit = await _projectContext.SaveChangesAsync();
         return commit;
     }
+
+    public async Task<List<Domain.Entities.Warehouse>> GetWarehousesProducts()
+    {
+        var data = await _projectContext
+            .Warehouse
+            .Include(e=>e.WarehouseProducts)
+            .ThenInclude(e=>e.product)
+            .ToListAsync();
+        return data;
+    }
+
+    public async Task<Domain.Entities.Warehouse> GetWarehouseById(int id)
+    {
+        var data = await _projectContext.Warehouse.FirstOrDefaultAsync(e => e.Id == id);
+        if (data != null)
+        {
+            return data;
+        }
+        throw new NotFoundException("Warehouse not found");
+    }
 }

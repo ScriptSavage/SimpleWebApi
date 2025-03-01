@@ -4,6 +4,10 @@ namespace Infrastructure.Repositories.Warehouse;
 
 public interface IWarehouseRepository
 {
-    Task<int> AddProductToWarehouse(int werehouseId , Product product , int quantity);
+    Task<int> AddProductToWarehouse(int werehouseId, Product product, int quantity);
     Task<int> AddNewWarehouse(Domain.Entities.Warehouse warehouse);
+
+    Task<List<Domain.Entities.Warehouse>> GetWarehousesProducts();
+    
+    Task<Domain.Entities.Warehouse> GetWarehouseById(int id);
 }

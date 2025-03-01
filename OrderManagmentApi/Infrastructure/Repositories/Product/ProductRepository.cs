@@ -15,7 +15,7 @@ public class ProductRepository : IProductRepository
     }
 
     public async Task<int> AddNewProductAsync(Product product)
-    {
+    { 
         var newProduct = await _context.Products.AddAsync(product);
        var commitData =  await _context.SaveChangesAsync();
 
@@ -52,7 +52,6 @@ public class ProductRepository : IProductRepository
         productToUpdate.Description = description;
        var commit = await _context.SaveChangesAsync();
 
-
        return commit;
     }
 
@@ -68,7 +67,7 @@ public class ProductRepository : IProductRepository
             
                 if (warehouseProduct == null)
                 {
-                    throw new NotFoundException("Produkt is not assignt to Warehouse");
+                    throw new NotFoundException("Product is not assign to Warehouse");
                 }
             
                 _context.WarehouseProducts.Remove(warehouseProduct);
@@ -97,4 +96,15 @@ public class ProductRepository : IProductRepository
         return result;
     }
 
+    public async Task<List<Product>> GetAllProductsConnectedWithWarehouseAsync(int warehouseId)
+    {
+        var data = await _context
+            .Products
+            .Where(e=>e.WarehouseProducts.Any(wp=>wp.WarehouseId == warehouseId))
+            .Include(e => e.WarehouseProducts)
+            .ThenInclude(e => e.Warehouse)
+            .ToListAsync();
+
+        return data;
+    }
 }

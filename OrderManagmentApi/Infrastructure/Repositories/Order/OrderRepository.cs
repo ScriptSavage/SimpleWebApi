@@ -22,4 +22,11 @@ public class OrderRepository : IOrderRepository
 
         return OrderData ?? throw new InvalidOperationException();
     }
+
+    public async Task<int> CreateOrderAsync(Domain.Entities.Order order)
+    {
+        var newOrder = await _context.Orders.AddAsync(order);
+        var commitData = await _context.SaveChangesAsync();
+        return commitData;
+    }
 }

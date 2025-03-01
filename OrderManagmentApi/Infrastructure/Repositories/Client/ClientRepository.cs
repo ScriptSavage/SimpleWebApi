@@ -1,3 +1,4 @@
+using Application.Exceptions;
 using Domain.Entities;
 using Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
@@ -30,5 +31,25 @@ public class ClientRepository : IClientRepository
     {
         var data = await _context.Clients.AnyAsync(x => x.Id == clientId);
         return data;
+    }
+
+    public async Task<int> DeleteClientAsync(int clientId)
+    {
+        var client = await _context.Clients.FirstOrDefaultAsync(x => x.Id == clientId);
+        if (client != null)
+            _context.Clients.Remove(client);
+        var commitData = await _context.SaveChangesAsync();
+        return commitData;
+            
+    }
+
+    public async Task<Domain.Entities.Client> GetClientByIdAsync(int clientId)
+    {
+        var client = await _context.Clients.FirstOrDefaultAsync(x => x.Id == clientId);
+        if (client != null)
+        {
+            return client;
+        }
+            throw new NotFoundException($"Client {client?.FirstName} does not exist");
     }
 }

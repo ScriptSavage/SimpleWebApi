@@ -22,7 +22,7 @@ namespace Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Domain.Entites.Client", b =>
+            modelBuilder.Entity("Domain.Entities.Client", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -43,7 +43,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("Clients");
                 });
 
-            modelBuilder.Entity("Domain.Entites.Order", b =>
+            modelBuilder.Entity("Domain.Entities.Order", b =>
                 {
                     b.Property<int>("OrderId")
                         .ValueGeneratedOnAdd()
@@ -68,7 +68,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("Domain.Entites.OrderProduct", b =>
+            modelBuilder.Entity("Domain.Entities.OrderProduct", b =>
                 {
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
@@ -86,7 +86,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("OrderProducts");
                 });
 
-            modelBuilder.Entity("Domain.Entites.Product", b =>
+            modelBuilder.Entity("Domain.Entities.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -111,7 +111,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("Domain.Entites.Warehouse", b =>
+            modelBuilder.Entity("Domain.Entities.Warehouse", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -132,7 +132,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("Warehouse");
                 });
 
-            modelBuilder.Entity("Domain.Entites.WarehouseProduct", b =>
+            modelBuilder.Entity("Domain.Entities.WarehouseProduct", b =>
                 {
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
@@ -158,9 +158,9 @@ namespace Infrastructure.Migrations
                     b.ToTable("WarehouseProducts");
                 });
 
-            modelBuilder.Entity("Domain.Entites.Order", b =>
+            modelBuilder.Entity("Domain.Entities.Order", b =>
                 {
-                    b.HasOne("Domain.Entites.Client", "Client")
+                    b.HasOne("Domain.Entities.Client", "Client")
                         .WithMany("Orders")
                         .HasForeignKey("ClientID")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -169,15 +169,15 @@ namespace Infrastructure.Migrations
                     b.Navigation("Client");
                 });
 
-            modelBuilder.Entity("Domain.Entites.OrderProduct", b =>
+            modelBuilder.Entity("Domain.Entities.OrderProduct", b =>
                 {
-                    b.HasOne("Domain.Entites.Order", "Order")
+                    b.HasOne("Domain.Entities.Order", "Order")
                         .WithMany("OrderProducts")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.Entites.Product", "Product")
+                    b.HasOne("Domain.Entities.Product", "Product")
                         .WithMany("OrderProducts")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -188,21 +188,21 @@ namespace Infrastructure.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("Domain.Entites.WarehouseProduct", b =>
+            modelBuilder.Entity("Domain.Entities.WarehouseProduct", b =>
                 {
-                    b.HasOne("Domain.Entites.Product", "product")
-                        .WithMany()
+                    b.HasOne("Domain.Entities.Product", "product")
+                        .WithMany("WarehouseProducts")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.Entites.Warehouse", "Warehouse")
+                    b.HasOne("Domain.Entities.Warehouse", "Warehouse")
                         .WithMany("WarehouseProducts")
                         .HasForeignKey("WarehouseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.Entites.WarehouseProduct", null)
+                    b.HasOne("Domain.Entities.WarehouseProduct", null)
                         .WithMany("WarehouseProducts")
                         .HasForeignKey("WarehouseProductProductId", "WarehouseProductWarehouseId");
 
@@ -211,27 +211,29 @@ namespace Infrastructure.Migrations
                     b.Navigation("product");
                 });
 
-            modelBuilder.Entity("Domain.Entites.Client", b =>
+            modelBuilder.Entity("Domain.Entities.Client", b =>
                 {
                     b.Navigation("Orders");
                 });
 
-            modelBuilder.Entity("Domain.Entites.Order", b =>
+            modelBuilder.Entity("Domain.Entities.Order", b =>
                 {
                     b.Navigation("OrderProducts");
                 });
 
-            modelBuilder.Entity("Domain.Entites.Product", b =>
+            modelBuilder.Entity("Domain.Entities.Product", b =>
                 {
                     b.Navigation("OrderProducts");
+
+                    b.Navigation("WarehouseProducts");
                 });
 
-            modelBuilder.Entity("Domain.Entites.Warehouse", b =>
+            modelBuilder.Entity("Domain.Entities.Warehouse", b =>
                 {
                     b.Navigation("WarehouseProducts");
                 });
 
-            modelBuilder.Entity("Domain.Entites.WarehouseProduct", b =>
+            modelBuilder.Entity("Domain.Entities.WarehouseProduct", b =>
                 {
                     b.Navigation("WarehouseProducts");
                 });

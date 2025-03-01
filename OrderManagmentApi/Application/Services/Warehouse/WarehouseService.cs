@@ -36,4 +36,23 @@ public class WarehouseService : IWarehouseService
         var data = await _warehouseRepository.AddNewWarehouse(newWarehouse);
        return data;
     }
+
+    public async Task<List<WarehouseProductsDTO>> GetWarehouseProductsAsync()
+    {
+        var warehouseProducts = await _warehouseRepository.GetWarehousesProducts();
+
+        var data = warehouseProducts
+            .Select(e => new WarehouseProductsDTO()
+            {
+                Name = e.Name,
+               Products = e.WarehouseProducts.Select(p => new ProductsDTO()
+               {
+                   Name = p.product.Name,
+                   Price = p.product.Price,
+                   Stock = p.Stock
+               }).ToList()
+            }).ToList();
+        
+            return data;
+    }
 }

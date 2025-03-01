@@ -6,4 +6,5 @@ public interface IWarehouseService
 {
     Task<int> AddNewProductToWarehouse(int warehouseId, NewProductDTO product,int quantity);
     Task<int> AddNewWarehouseAsync(NewWarehouseDTO warehouse);
+    Task<List<WarehouseProductsDTO>> GetWarehouseProductsAsync();
 }

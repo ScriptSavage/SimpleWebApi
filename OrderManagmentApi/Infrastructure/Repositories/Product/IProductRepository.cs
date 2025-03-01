@@ -13,4 +13,6 @@ public interface IProductRepository
     Task<int> UpdateProductDescriptionAsync(string description,int id);
     
     Task<int>DeleteProductFromWarehouseAsync(int productId , int warehouseId);
+    
+    Task<List<Product>> GetAllProductsConnectedWithWarehouseAsync(int warehouseId);
 }

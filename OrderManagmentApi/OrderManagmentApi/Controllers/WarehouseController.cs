@@ -30,4 +30,11 @@ public class WarehouseController :ControllerBase
         var data = await _warehouseService.AddNewWarehouseAsync(product);
         return StatusCode(StatusCodes.Status201Created, data);
     }
+
+    [HttpGet("products")]
+    public async Task<IActionResult> GetAllWarehousesProductsAsync()
+    {
+        var data = await _warehouseService.GetWarehouseProductsAsync();
+        return Ok(data);
+    }
 }

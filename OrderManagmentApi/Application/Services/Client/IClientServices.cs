@@ -8,4 +8,5 @@ public interface IClientServices
 
     Task<int> AddNewClientDtoAsync(ClientDTO clientDto);
     Task<bool> DoesClientExistAsync(int clientId);
+    Task<int> DeleteClientAsync(int clientId);
 }
