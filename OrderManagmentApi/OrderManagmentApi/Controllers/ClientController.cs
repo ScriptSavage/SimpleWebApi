@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace OrderManagmentApi.Controllers;
 
 [ApiController]
-[Route("api/clients")]
+[Route("api/client")]
 public class ClientController : ControllerBase
 {
     private readonly IClientServices _clientServices;
@@ -38,7 +38,7 @@ public class ClientController : ControllerBase
     
     
     [HttpGet]
-    [Route("{clientId}/orders")]
+    [Route("{clientId}/order")]
     public async Task<IActionResult> GetClientOrdersAsync([FromRoute] int clientId)
     {
         var clientExists = await _clientServices.DoesClientExistAsync(clientId);

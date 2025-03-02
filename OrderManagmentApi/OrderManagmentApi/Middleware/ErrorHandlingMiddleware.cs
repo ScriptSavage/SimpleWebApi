@@ -1,3 +1,5 @@
+using Application.Exceptions;
+
 namespace OrderManagmentApi.Middleware;
 
 public class ErrorHandlingMiddleware : IMiddleware
@@ -15,10 +17,15 @@ public class ErrorHandlingMiddleware : IMiddleware
         {
             await next.Invoke(context);
         }
+        catch (NotFoundException ex)
+        {
+            _logger.LogError(ex, ex.Message);
+            context.Response.StatusCode = StatusCodes.Status404NotFound;
+            await context.Response.WriteAsync("Not Found");
+        }
         catch (Exception e)
         {
             _logger.LogError(e, e.Message);
-            
             context.Response.StatusCode = 500;
             await context.Response.WriteAsync("Something went wrong");
         }

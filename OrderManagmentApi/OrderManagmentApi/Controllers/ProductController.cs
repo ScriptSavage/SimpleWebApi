@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace OrderManagmentApi.Controllers;
 
 [ApiController]
-[Route("api/products")]
+[Route("api/product")]
 public class ProductController : ControllerBase
 {
     
@@ -40,7 +40,7 @@ public class ProductController : ControllerBase
     }
 
     [HttpDelete]
-    [Route("{productId}/{warehouseId}")]
+    [Route("{productId}/warehouse/{warehouseId}")]
     public async Task<IActionResult> DeleteProductFromWarehouseAsync(int productId, int warehouseId)
     {
          await _productService.DeleteProductFromWarehouseAsync(productId,warehouseId);

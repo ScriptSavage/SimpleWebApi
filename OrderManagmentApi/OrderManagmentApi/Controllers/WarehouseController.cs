@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace OrderManagmentApi.Controllers;
 
 [ApiController]
-[Route("api/warehouses")]
+[Route("api/warehouse")]
 public class WarehouseController :ControllerBase
 { 
     private readonly IWarehouseService _warehouseService;
@@ -17,7 +17,7 @@ public class WarehouseController :ControllerBase
     }
 
     [HttpPost]
-    [Route("{warehouseId}/products")]
+    [Route("{warehouseId}/product")]
     public async Task<IActionResult> AddNewProductToWarehouseAsync(int warehouseId, [FromBody] NewProductDTO product,int quantity)
     {
         var data = await _warehouseService.AddNewProductToWarehouse(warehouseId, product,quantity);
@@ -31,7 +31,7 @@ public class WarehouseController :ControllerBase
         return StatusCode(StatusCodes.Status201Created, data);
     }
 
-    [HttpGet("products")]
+    [HttpGet("product")]
     public async Task<IActionResult> GetAllWarehousesProductsAsync()
     {
         var data = await _warehouseService.GetWarehouseProductsAsync();
