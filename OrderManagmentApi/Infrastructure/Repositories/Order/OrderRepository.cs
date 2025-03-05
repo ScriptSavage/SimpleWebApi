@@ -25,7 +25,7 @@ public class OrderRepository : IOrderRepository
 
     public async Task<int> CreateOrderAsync(Domain.Entities.Order order)
     {
-        var newOrder = await _context.Orders.AddAsync(order);
+       await _context.Orders.AddAsync(order);
         var commitData = await _context.SaveChangesAsync();
         return commitData;
     }

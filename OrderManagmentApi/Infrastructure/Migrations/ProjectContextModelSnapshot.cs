@@ -61,9 +61,14 @@ namespace Infrastructure.Migrations
                         .HasPrecision(20, 2)
                         .HasColumnType("decimal(20,2)");
 
+                    b.Property<int?>("WarehouseId")
+                        .HasColumnType("int");
+
                     b.HasKey("OrderId");
 
                     b.HasIndex("ClientID");
+
+                    b.HasIndex("WarehouseId");
 
                     b.ToTable("Orders");
                 });
@@ -166,6 +171,10 @@ namespace Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Domain.Entities.Warehouse", null)
+                        .WithMany("Orders")
+                        .HasForeignKey("WarehouseId");
+
                     b.Navigation("Client");
                 });
 
@@ -230,6 +239,8 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Entities.Warehouse", b =>
                 {
+                    b.Navigation("Orders");
+
                     b.Navigation("WarehouseProducts");
                 });
 

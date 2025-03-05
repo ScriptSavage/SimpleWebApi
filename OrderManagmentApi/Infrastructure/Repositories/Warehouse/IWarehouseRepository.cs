@@ -10,4 +10,5 @@ public interface IWarehouseRepository
     Task<List<Domain.Entities.Warehouse>> GetWarehousesProducts();
     
     Task<Domain.Entities.Warehouse> GetWarehouseById(int id);
+    Task<WarehouseProduct?> GetWarehouseProductAsync(int warehouseId, int productId);
 }

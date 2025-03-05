@@ -68,4 +68,13 @@ public class WarehouseRepository : IWarehouseRepository
         }
         throw new NotFoundException("Warehouse not found");
     }
+
+    public async Task<WarehouseProduct?> GetWarehouseProductAsync(int warehouseId, int productId)
+    {
+        return await _projectContext.WarehouseProducts
+            .Include(wp => wp.product)   
+            .Include(wp => wp.Warehouse)  
+            .FirstOrDefaultAsync(wp => wp.WarehouseId == warehouseId && wp.ProductId == productId);
+       
+    }
 }

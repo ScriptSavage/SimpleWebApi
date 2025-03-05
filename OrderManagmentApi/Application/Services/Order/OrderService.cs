@@ -1,5 +1,6 @@
 using Application.DTO;
 using Application.Exceptions;
+using Domain.Entities;
 using Infrastructure.Repositories;
 using Infrastructure.Repositories.Client;
 using Infrastructure.Repositories.Order;
@@ -12,15 +13,13 @@ public class OrderService : IOrderService
     private readonly IOrderRepository _orderRepository;
     private readonly IClientRepository _clientRepository;
     private readonly IWarehouseRepository _warehouseRepository;
-    private readonly IProductRepository _productRepository;
     
 
-    public OrderService(IOrderRepository orderRepository, IClientRepository clientRepository, IWarehouseRepository warehouseRepository, IProductRepository productRepository)
+    public OrderService(IOrderRepository orderRepository, IClientRepository clientRepository, IWarehouseRepository warehouseRepository)
     {
         _orderRepository = orderRepository;
         _clientRepository = clientRepository;
         _warehouseRepository = warehouseRepository;
-        _productRepository = productRepository;
     }
 
     public async Task<List<ClientOrdersDTO>> GetClientOrdersAsync(int clientId)
@@ -51,39 +50,63 @@ public class OrderService : IOrderService
         return result;
     }
 
-    public async Task<int> GetClientOrderAsync(CreateNewOrderDTO order)
+    public async Task<int> AddNewOrder(CreateNewOrderDTO order)
     {
         var client = await _clientRepository.GetClientByIdAsync(order.ClientId);
+        if (client == null)
+        {
+            throw new NotFoundException("Client not found");
+        }
 
         var warehouse = await _warehouseRepository.GetWarehouseById(order.WarehouseID);
-        
-
-        foreach (var item in order.ProductsLists)
+        if (warehouse == null)
         {
-            // var warehouseProduct = await _warehouseRepository.GetWarehouseProductAsync(order.WarehouseID, item.ProductId);
-            // if (warehouseProduct == null)
-            //     throw new NotFoundException($"Product with ID {item.ProductId} is not available in warehouse");
-            //
-            // if (warehouseProduct.Stock < item.Quantity)
-            //     throw new BusinessException($"Insufficient stock for product ID {item.ProductId}");
-
-            
+            throw new NotFoundException("Warehouse not found");
         }
-        
-        var makeNewOrder = new Domain.Entities.Order
-        {
-            
-        };
-       var result =   await _orderRepository.CreateOrderAsync(makeNewOrder);
-      
 
-      
-        var orderDto = new OrderDTO
+        var newOrder = new Domain.Entities.Order
         {
-            CreatedAt = DateTime.Now,
-            
+            ClientID = client.Id,
+            CreatedAt = DateTime.UtcNow,
+            OrderProducts = new List<OrderProduct>()
         };
+
+        decimal totalPrice = 0;
+
+        foreach (var productDto in order.ProductsLists)
+        {
+            var warehouseProduct = await _warehouseRepository.GetWarehouseProductAsync(warehouse.Id, productDto.ProductId);
+            if (warehouseProduct == null)
+            {
+                throw new NotFoundException($"Product with id {productDto.ProductId} not found in warehouse");
+            }
+
+            if (warehouseProduct.Stock < productDto.Quantity)
+            {
+                throw new BusinessException($"Not enough stock for this product");
+            }
+
+            warehouseProduct.Stock -= productDto.Quantity;
+
+          
+            decimal unitPrice = warehouseProduct.product.Price;
+
+            totalPrice += unitPrice * productDto.Quantity;
+
+            var orderProduct = new OrderProduct
+            {
+                ProductId = productDto.ProductId,
+                Amount = productDto.Quantity
+            };
+
+            newOrder.OrderProducts.Add(orderProduct);
+        }
+
+        newOrder.TotalPrice = totalPrice;
+
+        var result = await _orderRepository.CreateOrderAsync(newOrder);
+
         return result;
-        
     }
+
 }

@@ -18,7 +18,7 @@ public class ProjectContext : DbContext
     public DbSet<OrderProduct> OrderProducts { get; set; }
 
     public DbSet<Warehouse> Warehouse { get; set; }
-    public DbSet<WarehouseProduct> WarehouseProducts { get; set; }
+    public DbSet<WarehouseProduct?> WarehouseProducts { get; set; }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

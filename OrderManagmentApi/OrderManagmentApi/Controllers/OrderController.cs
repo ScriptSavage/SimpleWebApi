@@ -1,3 +1,4 @@
+using Application.DTO;
 using Application.Services.Order;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,6 +14,13 @@ public class OrderController : ControllerBase
     {
         _orderService = orderService;
     }
-    
+
+    [HttpPost]
+    [Route("create")]
+    public async Task<IActionResult> CreateNewOrder(CreateNewOrderDTO createNewOrderDTO)
+    {
+        var result = await _orderService.AddNewOrder(createNewOrderDTO);
+        return StatusCode(StatusCodes.Status201Created, result);
+    }
 
 }

@@ -40,7 +40,6 @@ public class ClientRepository : IClientRepository
             _context.Clients.Remove(client);
         var commitData = await _context.SaveChangesAsync();
         return commitData;
-            
     }
 
     public async Task<Domain.Entities.Client> GetClientByIdAsync(int clientId)
@@ -50,6 +49,6 @@ public class ClientRepository : IClientRepository
         {
             return client;
         }
-            throw new NotFoundException($"Client {client?.FirstName} does not exist");
+        throw new NotFoundException($"Client {client?.FirstName} does not exist");
     }
 }

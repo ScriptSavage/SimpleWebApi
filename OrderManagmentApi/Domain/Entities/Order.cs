@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -5,6 +6,7 @@ namespace Domain.Entities;
 
 public class Order
 {
+    [Key]
     public int  OrderId { get; set; }
     
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
@@ -16,6 +18,7 @@ public class Order
     public Client Client { get; set; }
     
     
-    public IEnumerable<OrderProduct>? OrderProducts { get; set; }
+    public ICollection<OrderProduct>? OrderProducts { get; set; } = new List<OrderProduct>();
 
+    
 }
