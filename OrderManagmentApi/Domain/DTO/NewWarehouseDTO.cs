@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Application.DTO;
+namespace Domain.DTO;
 
 public class NewWarehouseDTO
 {

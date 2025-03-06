@@ -1,4 +1,4 @@
-using Application.DTO;
+using Domain.DTO;
 using Infrastructure.Repositories;
 
 namespace Application.Services.Product;

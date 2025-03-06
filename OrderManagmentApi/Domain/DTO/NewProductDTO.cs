@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 
-namespace Application.DTO;
+namespace Domain.DTO;
 
 public class NewProductDTO
 {

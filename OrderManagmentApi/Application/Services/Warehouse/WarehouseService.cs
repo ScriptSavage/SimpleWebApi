@@ -1,4 +1,4 @@
-using Application.DTO;
+using Domain.DTO;
 using Infrastructure.Repositories.Warehouse;
 
 namespace Application.Services.Warehouse;
@@ -37,12 +37,12 @@ public class WarehouseService : IWarehouseService
        return data;
     }
 
-    public async Task<List<WarehouseProductsDTO>> GetWarehouseProductsAsync()
+    public async Task<List<WarehouseProductsDto>> GetWarehouseProductsAsync()
     {
         var warehouseProducts = await _warehouseRepository.GetWarehousesProducts();
 
         var data = warehouseProducts
-            .Select(e => new WarehouseProductsDTO()
+            .Select(e => new WarehouseProductsDto()
             {
                 Name = e.Name,
                Products = e.WarehouseProducts.Select(p => new ProductsDTO()

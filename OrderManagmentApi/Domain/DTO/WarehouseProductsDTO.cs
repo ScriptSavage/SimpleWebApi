@@ -1,6 +1,6 @@
-namespace Application.DTO;
+namespace Domain.DTO;
 
-public class WarehouseProductsDTO
+public class WarehouseProductsDto
 {
     public string Name { get; set; } = default!;
     public List<ProductsDTO> Products { get; set; }

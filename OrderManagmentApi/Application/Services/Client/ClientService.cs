@@ -1,4 +1,4 @@
-using Application.DTO;
+using Domain.DTO;
 using Infrastructure.Repositories.Client;
 using Microsoft.Extensions.Logging;
 

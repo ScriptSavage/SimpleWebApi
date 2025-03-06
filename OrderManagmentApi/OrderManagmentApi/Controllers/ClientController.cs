@@ -1,6 +1,6 @@
-using Application.DTO;
 using Application.Services.Client;
 using Application.Services.Order;
+using Domain.DTO;
 using Infrastructure.Repositories.Client;
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,5 +1,5 @@
-using Application.DTO;
 using Application.Exceptions;
+using Domain.DTO;
 using Domain.Entities;
 using Infrastructure.Repositories;
 using Infrastructure.Repositories.Client;

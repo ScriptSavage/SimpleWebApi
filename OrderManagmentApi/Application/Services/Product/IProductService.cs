@@ -1,4 +1,4 @@
-using Application.DTO;
+using Domain.DTO;
 
 namespace Application.Services.Product;
 

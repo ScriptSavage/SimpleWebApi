@@ -1,5 +1,5 @@
-using Application.DTO;
 using Application.Services.Warehouse;
+using Domain.DTO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

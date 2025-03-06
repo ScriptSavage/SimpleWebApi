@@ -14,13 +14,13 @@ public class OrderRepository : IOrderRepository
 
     public async Task<List<Domain.Entities.Order>> GetClientOrdersAsync(int clientId)
     {
-        var OrderData = await _context.Orders
+        var orderData = await _context.Orders
             .Include(e => e.Client).Where(e => e.ClientID == clientId)
             .Include(e => e.OrderProducts)!
             .ThenInclude(e => e.Product)
             .ToListAsync();
 
-        return OrderData ?? throw new InvalidOperationException();
+        return orderData;
     }
 
     public async Task<int> CreateOrderAsync(Domain.Entities.Order order)

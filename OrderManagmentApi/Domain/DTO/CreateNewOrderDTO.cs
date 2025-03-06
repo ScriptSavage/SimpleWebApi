@@ -1,4 +1,4 @@
-namespace Application.DTO;
+namespace Domain.DTO;
 
 public class CreateNewOrderDTO
 {
