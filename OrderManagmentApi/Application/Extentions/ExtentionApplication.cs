@@ -8,7 +8,7 @@ namespace Application.Extentions;
 
 public static class ExtentionApplication
 {
-    public static void AddAplicationLayer(this IServiceCollection services)
+    public static void AddApplicationLayer(this IServiceCollection services)
     {
         services.AddScoped<IClientServices, ClientService>();
         services.AddScoped<IProductService, ProductService>();

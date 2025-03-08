@@ -171,11 +171,13 @@ namespace Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.Entities.Warehouse", null)
+                    b.HasOne("Domain.Entities.Warehouse", "Warehouse")
                         .WithMany("Orders")
                         .HasForeignKey("WarehouseId");
 
                     b.Navigation("Client");
+
+                    b.Navigation("Warehouse");
                 });
 
             modelBuilder.Entity("Domain.Entities.OrderProduct", b =>

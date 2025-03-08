@@ -19,7 +19,7 @@ builder.Services.AddScoped<ErrorHandlingMiddleware>();
 
 
 builder.Services.AddInfrastructureLayer(builder.Configuration);
-builder.Services.AddAplicationLayer();
+builder.Services.AddApplicationLayer();
 
 var app = builder.Build();
 

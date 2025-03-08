@@ -107,4 +107,14 @@ public class ProductRepository : IProductRepository
 
         return data;
     }
+
+    public async Task<List<Domain.Entities.Order>> GetAllOrdersByWarehouseAsync(int warehouseId)
+    {
+        
+        return await _context.Orders
+            .Where(o => o.WarehouseId == warehouseId)
+            .Include(o => o.OrderProducts)!
+            .ThenInclude(op => op.Product)
+            .ToListAsync();
+    }
 }

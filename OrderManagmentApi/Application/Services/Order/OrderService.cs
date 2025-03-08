@@ -67,6 +67,7 @@ public class OrderService : IOrderService
         var newOrder = new Domain.Entities.Order
         {
             ClientID = client.Id,
+            WarehouseId = order.WarehouseID,
             CreatedAt = DateTime.UtcNow,
             OrderProducts = new List<OrderProduct>()
         };

@@ -1,4 +1,6 @@
+using Application.Services.Product;
 using Domain.DTO;
+using Infrastructure.Repositories;
 using Infrastructure.Repositories.Warehouse;
 
 namespace Application.Services.Warehouse;
@@ -6,10 +8,11 @@ namespace Application.Services.Warehouse;
 public class WarehouseService : IWarehouseService
 {
     private readonly IWarehouseRepository _warehouseRepository;
-
-    public WarehouseService(IWarehouseRepository warehouseRepository)
+    private readonly IProductRepository _productRepository;
+    public WarehouseService(IWarehouseRepository warehouseRepository, IProductRepository productRepository)
     {
         _warehouseRepository = warehouseRepository;
+        _productRepository = productRepository;
     }
 
     public async Task<int> AddNewProductToWarehouse(int warehouseId, NewProductDTO product ,int quantity)
@@ -54,5 +57,30 @@ public class WarehouseService : IWarehouseService
             }).ToList();
         
             return data;
+    }
+
+    public async Task<WerehouseProductSalesDTO> GetWarehouseProductsSalesAsync(int warehouseId)
+    {
+        var warehouse = await _warehouseRepository.GetWarehouseById(warehouseId);
+        var orders = await _productRepository.GetAllOrdersByWarehouseAsync(warehouseId);
+        
+       
+        var productSales = orders
+            .SelectMany(o => o.OrderProducts)      
+            .GroupBy(op => op.ProductId)           
+            .Select(g => new ProductSalesDTO
+            {
+                ProductName = g.First().Product.Name,
+                Quantity = g.Sum(x => x.Amount)
+            })
+            .ToList();
+        var result = new WerehouseProductSalesDTO
+        {
+            WarehouseName = warehouse.Name,
+            ProductSales = productSales
+        };
+
+        return result;    
+        
     }
 }

@@ -37,4 +37,12 @@ public class WarehouseController :ControllerBase
         var data = await _warehouseService.GetWarehouseProductsAsync();
         return Ok(data);
     }
+    
+    [HttpGet("{warehouseId}/sales")]
+    public async Task<IActionResult> GetWarehouseProductsSalesAsync(int warehouseId)
+    {
+        var result = await _warehouseService.GetWarehouseProductsSalesAsync(warehouseId);
+        return Ok(result);
+    }
+
 }

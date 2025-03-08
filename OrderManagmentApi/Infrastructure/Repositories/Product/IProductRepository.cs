@@ -15,4 +15,6 @@ public interface IProductRepository
     Task<int>DeleteProductFromWarehouseAsync(int productId , int warehouseId);
     
     Task<List<Product>> GetAllProductsConnectedWithWarehouseAsync(int warehouseId);
+
+    Task<List<Domain.Entities.Order>> GetAllOrdersByWarehouseAsync(int warehouseId);
 }

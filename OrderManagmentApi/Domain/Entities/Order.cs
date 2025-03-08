@@ -20,5 +20,10 @@ public class Order
     
     public ICollection<OrderProduct>? OrderProducts { get; set; } = new List<OrderProduct>();
 
+
+    public int? WarehouseId { get; set; }
+    [ForeignKey(nameof(WarehouseId))]
+    public Warehouse? Warehouse { get; set; }
+
     
 }
