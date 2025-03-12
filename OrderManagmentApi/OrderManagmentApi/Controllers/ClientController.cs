@@ -27,14 +27,6 @@ public class ClientController : ControllerBase
         var response = await _clientServices.GetClientsAsync();
         return Ok(response);
     }
-
-    [HttpPost]
-    public async Task<IActionResult> AddNewClientAsync([FromBody]ClientDTO clientDto)
-    {
-        var data = await _clientServices.AddNewClientDtoAsync(clientDto);
-        
-        return StatusCode(StatusCodes.Status201Created, data);
-    }
     
     
     [HttpGet]

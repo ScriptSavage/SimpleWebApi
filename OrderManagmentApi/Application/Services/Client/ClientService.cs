@@ -1,5 +1,7 @@
+using Application.Services.User;
 using Domain.DTO;
 using Infrastructure.Repositories.Client;
+using Infrastructure.Repositories.User;
 using Microsoft.Extensions.Logging;
 
 namespace Application.Services.Client;
@@ -8,6 +10,7 @@ public class ClientService : IClientServices
 {
     
     private readonly IClientRepository _clientRepository;
+    private readonly IUserRepository _userRepository;
     private readonly ILogger<ClientService> _clientLogger;
 
     public ClientService(IClientRepository clientRepository, ILogger<ClientService> clientLogger)
@@ -54,6 +57,7 @@ public class ClientService : IClientServices
 
     public async Task<int> DeleteClientAsync(int clientId)
     {
+        
         var clientToDelete = await _clientRepository.DeleteClientAsync(clientId);
         return clientToDelete;
     }

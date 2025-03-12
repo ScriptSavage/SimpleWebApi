@@ -19,6 +19,9 @@ public class ProjectContext : DbContext
 
     public DbSet<Warehouse> Warehouse { get; set; }
     public DbSet<WarehouseProduct?> WarehouseProducts { get; set; }
+
+    public DbSet<User> Users { get; set; }
+    public DbSet<Role> Roles { get; set; }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

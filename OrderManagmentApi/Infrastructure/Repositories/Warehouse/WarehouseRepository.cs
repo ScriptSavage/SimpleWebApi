@@ -75,6 +75,5 @@ public class WarehouseRepository : IWarehouseRepository
             .Include(wp => wp.product)   
             .Include(wp => wp.Warehouse)  
             .FirstOrDefaultAsync(wp => wp.WarehouseId == warehouseId && wp.ProductId == productId);
-       
     }
 }
