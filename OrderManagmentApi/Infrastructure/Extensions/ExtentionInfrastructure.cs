@@ -8,9 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Infrastructure.Extentions;
+namespace Infrastructure.Extensions;
 
-public  static class ExtentionInfrastructure
+public  static class ExtensionInfrastructure
 {
     public static void AddInfrastructureLayer(this IServiceCollection services, IConfiguration configuration)
     {

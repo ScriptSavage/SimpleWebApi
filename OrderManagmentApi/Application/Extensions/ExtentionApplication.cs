@@ -4,9 +4,9 @@ using Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Application.Extentions;
+namespace Application.Extensions;
 
-public static class ExtentionApplication
+public static class ExtensionApplication
 {
     public static void AddApplicationLayer(this IServiceCollection services)
     {

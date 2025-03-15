@@ -3,9 +3,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 
-namespace Infrastructure;
+namespace Infrastructure.Authentication;
 
-public static class AuthorizationExtention
+public static class AuthorizationExtension
 {
     public static void AddJwtAuthentication(this IServiceCollection services , IConfiguration configuration)
     {

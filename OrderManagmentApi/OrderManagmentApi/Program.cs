@@ -1,10 +1,11 @@
 using System.Text;
-using Application.Extentions;
+using Application.Extensions;
 using FluentValidation.AspNetCore;
 using Infrastructure.Context;
-using Infrastructure.Extentions;
 using Microsoft.EntityFrameworkCore;
 using Infrastructure;
+using Infrastructure.Authentication;
+using Infrastructure.Extensions;
 using Infrastructure.Repositories;
 using Microsoft.IdentityModel.Tokens;
 using NLog.Web;
