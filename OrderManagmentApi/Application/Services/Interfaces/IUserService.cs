@@ -1,6 +1,6 @@
 using Domain.DTO;
 
-namespace Application.Services.User;
+namespace Application.Services.Interfaces;
 
 public interface IUserService 
 {

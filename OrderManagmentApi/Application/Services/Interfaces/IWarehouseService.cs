@@ -1,6 +1,6 @@
 using Domain.DTO;
 
-namespace Application.Services.Warehouse;
+namespace Application.Services.Interfaces;
 
 public interface IWarehouseService
 {

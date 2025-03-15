@@ -1,8 +1,8 @@
-namespace Infrastructure.Repositories.User;
+namespace Domain.Interfaces;
 
 public interface IUserRepository
 {
-    Task<int> AddAsync(Domain.Entities.User user);
+    Task<int> AddUserAsync(Domain.Entities.User user);
 
     Task<bool> DoesUserExistAsync(string email);
     

@@ -1,4 +1,4 @@
-namespace Infrastructure.Repositories.Client;
+namespace Domain.Interfaces;
 
 public interface IClientRepository
 {

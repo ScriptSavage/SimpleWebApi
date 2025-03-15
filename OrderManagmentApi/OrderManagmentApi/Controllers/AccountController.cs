@@ -1,11 +1,11 @@
-using Application.Services.User;
+using Application.Services.Interfaces;
 using Domain.DTO;
 using Microsoft.AspNetCore.Mvc;
 
 namespace OrderManagmentApi.Controllers;
 
 [ApiController]
-[Route("ap/account")]
+[Route("api/account")]
 public class AccountController : ControllerBase
 { 
     private readonly IUserService _userService;

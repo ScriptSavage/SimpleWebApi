@@ -1,7 +1,8 @@
+using Domain.Interfaces;
 using Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infrastructure.Repositories.Order;
+namespace Infrastructure.Repositories;
 
 public class OrderRepository : IOrderRepository
 {

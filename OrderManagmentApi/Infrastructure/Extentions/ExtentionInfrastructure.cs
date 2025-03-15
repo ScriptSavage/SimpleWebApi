@@ -1,12 +1,9 @@
 using Domain.DTO;
+using Domain.Interfaces;
 using Domain.Validator;
 using FluentValidation;
 using Infrastructure.Context;
 using Infrastructure.Repositories;
-using Infrastructure.Repositories.Client;
-using Infrastructure.Repositories.Order;
-using Infrastructure.Repositories.User;
-using Infrastructure.Repositories.Warehouse;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

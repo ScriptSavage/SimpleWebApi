@@ -1,9 +1,10 @@
 using Application.Exceptions;
 using Domain.Entities;
+using Domain.Interfaces;
 using Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infrastructure.Repositories.Warehouse;
+namespace Infrastructure.Repositories;
 
 public class WarehouseRepository : IWarehouseRepository
 {

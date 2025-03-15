@@ -16,5 +16,5 @@ public class RegisterNewUserDTO
     public string ConfirmedPassword { get; set; }
     
     public DateTime? BirthdayDate { get; set; }
-    public int RoleId { get; set; } = 1;
+    public int RoleId { get; set; } = 2;
 }

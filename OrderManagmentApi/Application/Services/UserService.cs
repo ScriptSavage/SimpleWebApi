@@ -2,14 +2,14 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Application.Exceptions;
+using Application.Services.Interfaces;
 using Domain.DTO;
+using Domain.Interfaces;
 using Infrastructure;
-using Infrastructure.Repositories.Client;
-using Infrastructure.Repositories.User;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 
-namespace Application.Services.User;
+namespace Application.Services;
 
 public class UserService : IUserService
 {
@@ -48,7 +48,7 @@ public class UserService : IUserService
        var hashedPassword =  _passwordHasher.HashPassword(newUser, registerNewUser.Password);
        newUser.PasswordHash = hashedPassword;
        await _clientRepository.AddNewClientAsync(newClient);
-        return await _userRepository.AddAsync(newUser);
+        return await _userRepository.AddUserAsync(newUser);
     }
 
     public async Task<string> GenerateJwtTokenAsync(LoginDTO userDto)
@@ -56,7 +56,7 @@ public class UserService : IUserService
         var doesUserExists = await _userRepository.DoesUserExistAsync(userDto.Email);
         if (!doesUserExists)
         {
-            throw new NotFoundException("Use NOT Found");
+            throw new NotFoundException("User NOT Found");
         }
         var user = await _userRepository.FingByEmailAsync(userDto.Email);
         

@@ -1,7 +1,7 @@
-using Application.Services.Client;
-using Application.Services.Order;
+using Application.Services.Interfaces;
 using Domain.DTO;
-using Infrastructure.Repositories.Client;
+using Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -22,6 +22,7 @@ public class ClientController : ControllerBase
     }
 
     [HttpGet]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> GetClientsAsync()
     {
         var response = await _clientServices.GetClientsAsync();
@@ -31,6 +32,7 @@ public class ClientController : ControllerBase
     
     [HttpGet]
     [Route("{clientId}/order")]
+    [Authorize(Roles = "User")]
     public async Task<IActionResult> GetClientOrdersAsync([FromRoute] int clientId)
     {
         var clientExists = await _clientServices.DoesClientExistAsync(clientId);
@@ -46,6 +48,8 @@ public class ClientController : ControllerBase
 
     [HttpDelete]
     [Route("{clientId}")]
+    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "User")]
     public async Task<IActionResult> DeleteClientAsync([FromRoute] int clientId)
     {
         var doesClientExistAsync = await _clientServices.DoesClientExistAsync(clientId);

@@ -1,9 +1,9 @@
 using Application.Exceptions;
-using Domain.Entities;
+using Domain.Interfaces;
 using Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infrastructure.Repositories.Client;
+namespace Infrastructure.Repositories;
 
 public class ClientRepository : IClientRepository
 {

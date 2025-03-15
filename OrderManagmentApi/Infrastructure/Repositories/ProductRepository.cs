@@ -1,5 +1,6 @@
 using Application.Exceptions;
 using Domain.Entities;
+using Domain.Interfaces;
 using Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 
@@ -116,5 +117,14 @@ public class ProductRepository : IProductRepository
             .Include(o => o.OrderProducts)!
             .ThenInclude(op => op.Product)
             .ToListAsync();
+    }
+
+    public async Task<Product> GetProductDetailsAsync(int ProductId)
+    {
+        var product  = await _context
+            .Products
+            .FirstOrDefaultAsync(p => p.Id == ProductId);
+            
+        return product;
     }
 }

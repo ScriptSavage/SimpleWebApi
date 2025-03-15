@@ -1,6 +1,6 @@
 using Domain.Entities;
 
-namespace Infrastructure.Repositories.Warehouse;
+namespace Domain.Interfaces;
 
 public interface IWarehouseRepository
 {

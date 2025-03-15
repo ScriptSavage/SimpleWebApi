@@ -1,11 +1,13 @@
-using Application.Services.Product;
+using Application.Services.Interfaces;
 using Domain.DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace OrderManagmentApi.Controllers;
 
 [ApiController]
 [Route("api/product")]
+
 public class ProductController : ControllerBase
 {
     
@@ -17,6 +19,7 @@ public class ProductController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> AddNewProductAsync([FromBody] NewProductDTO productDto)
     {
         await _productService.AddNewProductAsync(productDto);
@@ -25,6 +28,7 @@ public class ProductController : ControllerBase
 
     [HttpDelete]
     [Route("{productId}")]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> DeleteProductAsync(int productId)
     {
         await _productService.DeleteProductAsync(productId);
@@ -33,6 +37,7 @@ public class ProductController : ControllerBase
 
     [HttpPut]
     [Route("{productId}")]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> UpdateProductAsync([FromBody]NewProductDTO productDto,int productId)
     {
         var dataToUpdate = await _productService.UpdateProductAsync(productDto,productId);
@@ -41,10 +46,18 @@ public class ProductController : ControllerBase
 
     [HttpDelete]
     [Route("{productId}/warehouse/{warehouseId}")]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> DeleteProductFromWarehouseAsync(int productId, int warehouseId)
     {
          await _productService.DeleteProductFromWarehouseAsync(productId,warehouseId);
         return StatusCode(StatusCodes.Status204NoContent);
+    }
 
+    [HttpGet("details/{productId}")]
+    [AllowAnonymous]
+    public async Task<IActionResult> GetProductDetailsByIdAsync(int productId)
+    {
+        var productDetails = await _productService.GetProductDetailsAsync(productId);
+        return Ok(productDetails);
     }
 }

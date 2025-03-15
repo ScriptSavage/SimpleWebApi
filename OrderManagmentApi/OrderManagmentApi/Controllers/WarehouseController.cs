@@ -1,4 +1,4 @@
-using Application.Services.Warehouse;
+using Application.Services.Interfaces;
 using Domain.DTO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -7,7 +7,8 @@ namespace OrderManagmentApi.Controllers;
 
 [ApiController]
 [Route("api/warehouse")]
-public class WarehouseController :ControllerBase
+[Authorize(Roles = "Admin")]
+public class WarehouseController : ControllerBase
 { 
     private readonly IWarehouseService _warehouseService;
 
@@ -25,6 +26,7 @@ public class WarehouseController :ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> AddNewWarehouseAsync([FromBody] NewWarehouseDTO product)
     {
         var data = await _warehouseService.AddNewWarehouseAsync(product);

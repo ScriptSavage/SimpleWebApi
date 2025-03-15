@@ -1,10 +1,9 @@
-using Application.Services.User;
+using Application.Services.Interfaces;
 using Domain.DTO;
-using Infrastructure.Repositories.Client;
-using Infrastructure.Repositories.User;
+using Domain.Interfaces;
 using Microsoft.Extensions.Logging;
 
-namespace Application.Services.Client;
+namespace Application.Services;
 
 public class ClientService : IClientServices
 {

@@ -1,5 +1,7 @@
-using Application.Services.Order;
+using Application.Services.Interfaces;
 using Domain.DTO;
+using Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace OrderManagmentApi.Controllers;
@@ -17,6 +19,7 @@ public class OrderController : ControllerBase
 
     [HttpPost]
     [Route("create")]
+    [Authorize(Roles = "User")]
     public async Task<IActionResult> CreateNewOrder(CreateNewOrderDTO createNewOrderDTO)
     {
         var result = await _orderService.AddNewOrder(createNewOrderDTO);

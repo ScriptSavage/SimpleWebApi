@@ -1,6 +1,6 @@
 using Domain.Entities;
 
-namespace Infrastructure.Repositories;
+namespace Domain.Interfaces;
 
 public interface IProductRepository
 {
@@ -17,4 +17,6 @@ public interface IProductRepository
     Task<List<Product>> GetAllProductsConnectedWithWarehouseAsync(int warehouseId);
 
     Task<List<Domain.Entities.Order>> GetAllOrdersByWarehouseAsync(int warehouseId);
+    
+    Task<Product> GetProductDetailsAsync(int ProductId);
 }

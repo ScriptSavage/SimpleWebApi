@@ -1,7 +1,8 @@
+using Domain.Interfaces;
 using Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infrastructure.Repositories.User;
+namespace Infrastructure.Repositories;
 
 public class UserRepository : IUserRepository
 {
@@ -12,7 +13,7 @@ public class UserRepository : IUserRepository
         _context = context;
     }
 
-    public async Task<int> AddAsync(Domain.Entities.User user)
+    public async Task<int> AddUserAsync(Domain.Entities.User user)
     {
         _context.Users.Add(user);
        var commitData = await _context.SaveChangesAsync();

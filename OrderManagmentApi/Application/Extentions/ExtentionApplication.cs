@@ -1,8 +1,5 @@
-using Application.Services.Client;
-using Application.Services.Order;
-using Application.Services.Product;
-using Application.Services.User;
-using Application.Services.Warehouse;
+using Application.Services;
+using Application.Services.Interfaces;
 using Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;

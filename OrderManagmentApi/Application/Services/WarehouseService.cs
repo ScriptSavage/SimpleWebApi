@@ -1,9 +1,8 @@
-using Application.Services.Product;
+using Application.Services.Interfaces;
 using Domain.DTO;
-using Infrastructure.Repositories;
-using Infrastructure.Repositories.Warehouse;
+using Domain.Interfaces;
 
-namespace Application.Services.Warehouse;
+namespace Application.Services;
 
 public class WarehouseService : IWarehouseService
 {

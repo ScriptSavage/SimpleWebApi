@@ -1,12 +1,10 @@
 using Application.Exceptions;
+using Application.Services.Interfaces;
 using Domain.DTO;
 using Domain.Entities;
-using Infrastructure.Repositories;
-using Infrastructure.Repositories.Client;
-using Infrastructure.Repositories.Order;
-using Infrastructure.Repositories.Warehouse;
+using Domain.Interfaces;
 
-namespace Application.Services.Order;
+namespace Application.Services;
 
 public class OrderService : IOrderService
 {

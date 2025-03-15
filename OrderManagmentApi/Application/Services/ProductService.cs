@@ -1,7 +1,8 @@
+using Application.Services.Interfaces;
 using Domain.DTO;
-using Infrastructure.Repositories;
+using Domain.Interfaces;
 
-namespace Application.Services.Product;
+namespace Application.Services;
 
 public class ProductService : IProductService
 {
@@ -48,5 +49,17 @@ public class ProductService : IProductService
     {
         var resultProduct = await _productRepository.DeleteProductFromWarehouseAsync(warehouseId, productId);
         return resultProduct;
+    }
+
+    public async Task<ProductDetailsDTO> GetProductDetailsAsync(int productId)
+    {
+        var resultProduct = await _productRepository.GetProductDetailsAsync(productId);
+        var productDTO = new ProductDetailsDTO()
+        {
+            Name = resultProduct.Name,
+            Description = resultProduct.Description,
+            Price = resultProduct.Price
+        };
+        return productDTO;
     }
 }

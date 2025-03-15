@@ -1,4 +1,4 @@
-namespace Infrastructure.Repositories.Order;
+namespace Domain.Interfaces;
 
 public interface IOrderRepository
 {
